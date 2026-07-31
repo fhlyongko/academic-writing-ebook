@@ -1,0 +1,274 @@
+{
+ "01": [
+  {
+   "key": "these demands may be especially",
+   "intro": "",
+   "head": [
+    "Weak",
+    "Stronger"
+   ],
+   "rows": [
+    [
+     "Academic writing is very difficult, and many people have different ideas about it.",
+     "Academic writing requires writers to coordinate disciplinary conventions, evidence, and audience expectations; these demands may be especially visible when students enter a new linguistic and institutional context."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "02": [
+  {
+   "key": "Use interviews or focus groups for",
+   "intro": "",
+   "head": [
+    "Question-method mismatch",
+    "Better alignment"
+   ],
+   "rows": [
+    [
+     "How do first-year international students experience group work? A closed yes/no survey alone is unlikely to capture the process or meaning of that experience.",
+     "Use interviews or focus groups for detailed accounts, and add a survey only if the study also needs evidence about broader patterns."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "03": [
+  {
+   "key": "Semi-structured interviews were appropriate because the",
+   "intro": "",
+   "head": [
+    "Untraceable claim",
+    "Traceable claim"
+   ],
+   "rows": [
+    [
+     "The method was appropriate, and the results were meaningful.",
+     "Semi-structured interviews were appropriate because the study examined how participants interpreted a shared institutional experience; the recurring accounts support a contextual, rather than universal, conclusion."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "04": [
+  {
+   "key": "in one program describe access to academic advising",
+   "intro": "",
+   "head": [
+    "Unmanageable plan",
+    "Feasible plan"
+   ],
+   "rows": [
+    [
+     "Review all research on international students and determine the best policy for Korean universities.",
+     "Analyze how first-year international undergraduates in one program describe access to academic advising during their first semester."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "05": [
+  {
+   "key": "Read the source, close it, state the idea from memory",
+   "intro": "",
+   "head": [
+    "Patchwriting",
+    "Ethical paraphrase process"
+   ],
+   "rows": [
+    [
+     "Students experience many academic and cultural challenges when they enter a new educational system.",
+     "Read the source, close it, state the idea from memory in relation to your argument, compare meanings, revise, and cite the source."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "06": [
+  {
+   "key": "May I organize the body by",
+   "intro": "",
+   "head": [
+    "Vague request to a professor",
+    "Focused request"
+   ],
+   "rows": [
+    [
+     "Please tell me how to write this evaluation paper.",
+     "I understand that the paper must compare two theories. May I organize the body by criterion rather than discussing each theory separately?"
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "07": [
+  {
+   "key": "language, institutional access, and disciplinary",
+   "intro": "",
+   "head": [
+    "Evidence without analysis",
+    "Synthesis"
+   ],
+   "rows": [
+    [
+     "Several studies reported difficulties. Kim (2021) found X. Lee (2020) found Y.",
+     "Across the studies, difficulties arose not from language alone but from the interaction of language, institutional access, and disciplinary expectations."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "08": [
+  {
+   "key": "program interpret when and how to request advising",
+   "intro": "",
+   "head": [
+    "Topic only",
+    "Research problem"
+   ],
+   "rows": [
+    [
+     "This study is about international students in Korea.",
+     "Although universities provide academic support, little is known about how first-year international students in this program interpret when and how to request advising; this uncertainty may limit timely access to support."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "09": [
+  {
+   "key": "because these constructs operationalize",
+   "intro": "",
+   "head": [
+    "Decorative theory",
+    "Integrated theory"
+   ],
+   "rows": [
+    [
+     "This study uses social identity theory. The next section describes the survey.",
+     "The survey measures identification, belonging, and boundary perception because these constructs operationalize the study's theoretical account of group membership."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "10": [
+  {
+   "key": "access points - advising, mentoring, and orientation",
+   "intro": "",
+   "head": [
+    "Source-by-source reporting",
+    "Synthesis"
+   ],
+   "rows": [
+    [
+     "Kim studied advising. Lee studied mentoring. Park studied orientation.",
+     "Research on institutional support emphasizes three access points - advising, mentoring, and orientation - but the studies differ in whether students are treated as recipients of information or active interpreters of institutional norms."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "11": [
+  {
+   "key": "defined population; this design estimates patterns of",
+   "intro": "",
+   "head": [
+    "Tool-centered justification",
+    "Methodological justification"
+   ],
+   "rows": [
+    [
+     "A survey was used because surveys are efficient.",
+     "A cross-sectional survey was selected because the study sought comparable self-reports across a defined population; this design estimates patterns of association but does not establish temporal or causal relationships."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "12": [
+  {
+   "key": "lowest during the first month and increased after",
+   "intro": "",
+   "head": [
+    "Data dump",
+    "Analytical presentation"
+   ],
+   "rows": [
+    [
+     "Table 4 shows all responses. Many values are different.",
+     "As shown in Table 4, reported access to advising was lowest during the first month and increased after students attended departmental orientation; the pattern was strongest among first-semester undergraduates."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "13": [
+  {
+   "key": "associated with clearer knowledge of advising routes",
+   "intro": "",
+   "head": [
+    "Overclaim",
+    "Proportional conclusion"
+   ],
+   "rows": [
+    [
+     "This study proves that orientation programs solve international students' academic problems.",
+     "Within the studied program, orientation was associated with clearer knowledge of advising routes; longitudinal research is needed to determine whether this knowledge improves later academic outcomes."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "14": [
+  {
+   "key": "paragraph organization second, sentence style third",
+   "intro": "",
+   "head": [
+    "Late-stage editing error",
+    "Efficient sequence"
+   ],
+   "rows": [
+    [
+     "Correcting sentence style before confirming that the research questions match the analysis.",
+     "Review alignment and evidence first, section and paragraph organization second, sentence style third, and proofreading and formatting last."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "15": [
+  {
+   "key": "the literature and methods needed to support",
+   "intro": "",
+   "head": [
+    "Thesis-to-article mistake",
+    "Audience-centered adaptation"
+   ],
+   "rows": [
+    [
+     "Submitting an entire thesis chapter with its full literature review and expecting journal editors to identify the contribution.",
+     "Select one article-level question, retain only the literature and methods needed to support it, and foreground the contribution expected by the target journal."
+    ]
+   ],
+   "tail": ""
+  }
+ ],
+ "16": [
+  {
+   "key": "documented the data workflow, and presented the",
+   "intro": "",
+   "head": [
+    "Abstract skill claim",
+    "Evidence-based skill claim"
+   ],
+   "rows": [
+    [
+     "I have good research and communication skills.",
+     "I coordinated a multilingual interview study, documented the data workflow, and presented the analysis to both academic and practitioner audiences."
+    ]
+   ],
+   "tail": ""
+  }
+ ]
+}
