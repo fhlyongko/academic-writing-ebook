@@ -31,15 +31,22 @@
     document.querySelectorAll(".toc .pt").forEach(function(p){p.textContent=trPart(p.textContent);});
     var umap={"회차":"chapters","부":"parts","쪽 원본":"source pages"};
     document.querySelectorAll(".stats > div").forEach(function(d){var b=d.querySelector("b"); if(!b)return; var num=b.textContent; var unit=d.textContent.replace(num,"").trim(); if(umap[unit]!==undefined)d.innerHTML="<b>"+num+"</b> "+umap[unit];});
+    var FIX=[
+      ["Institutional Review Board (IRB; \uAE30\uAD00\uC0DD\uBA85\uC724\uB9AC\uC704\uC6D0\uD68C)","Institutional Review Board (IRB)"],
+      ["Research ethics guidelines [\uC5F0\uAD6C\uC724\uB9AC \uD655\uBCF4\uB97C \uC704\uD55C \uC9C0\uCE68]","Research ethics guidelines"],
+      ["Maintain a bilingual term bank containing the Korean term, preferred English rendering, definition, source, and notes on context. Examples include \uD559\uC704\uB17C\uBB38 (thesis or dissertation, depending on the degree and institutional usage), \uB17C\uBB38\uACC4\uD68D\uC11C (thesis or research proposal), \uC608\uBE44\uC2EC\uC0AC (preliminary review), \uBCF8\uC2EC\uC0AC (final examination or final review), \uC218\uC815\uB300\uC870\uD45C (revision response table), and \uC9C0\uB3C4\uAD50\uC218 (academic advisor, research supervisor, or thesis supervisor).",
+       "Maintain a term bank that records each key institutional term, its preferred English rendering, a definition, the source, and notes on context. Examples include the thesis or dissertation (the term depends on the degree and institutional usage), the research proposal, the preliminary review, the final examination or final review, the revision response table, and the academic advisor, research supervisor, or thesis supervisor."]
+    ];
     var HAN=/[\uAC00-\uD7A3]/;
     var scope=document.querySelector(".art")||document.body;
     if(HAN.test(scope.textContent)){
       var w=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,null),nn,ns=[];
       while(nn=w.nextNode())ns.push(nn);
       ns.forEach(function(tn){ if(!HAN.test(tn.nodeValue))return; var v=tn.nodeValue;
+        for(var i=0;i<FIX.length;i++){ if(v.indexOf(FIX[i][0])>=0)v=v.split(FIX[i][0]).join(FIX[i][1]); }
         v=v.replace(/\s*[\[\(][^\]\)]*[\uAC00-\uD7A3][^\]\)]*[\]\)]/g,"");
         v=v.replace(/[\uAC00-\uD7A3][\uAC00-\uD7A3\s·]*/g,"");
-        v=v.replace(/\s{2,}/g," ");
+        v=v.replace(/\s{2,}/g," ").replace(/\s+([,.;])/g,"$1");
         tn.nodeValue=v;
       });
     }
