@@ -31,6 +31,18 @@
     document.querySelectorAll(".toc .pt").forEach(function(p){p.textContent=trPart(p.textContent);});
     var umap={"회차":"chapters","부":"parts","쪽 원본":"source pages"};
     document.querySelectorAll(".stats > div").forEach(function(d){var b=d.querySelector("b"); if(!b)return; var num=b.textContent; var unit=d.textContent.replace(num,"").trim(); if(umap[unit]!==undefined)d.innerHTML="<b>"+num+"</b> "+umap[unit];});
+    var HAN=/[\uAC00-\uD7A3]/;
+    var scope=document.querySelector(".art")||document.body;
+    if(HAN.test(scope.textContent)){
+      var w=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,null),nn,ns=[];
+      while(nn=w.nextNode())ns.push(nn);
+      ns.forEach(function(tn){ if(!HAN.test(tn.nodeValue))return; var v=tn.nodeValue;
+        v=v.replace(/\s*[\[\(][^\]\)]*[\uAC00-\uD7A3][^\]\)]*[\]\)]/g,"");
+        v=v.replace(/[\uAC00-\uD7A3][\uAC00-\uD7A3\s·]*/g,"");
+        v=v.replace(/\s{2,}/g," ");
+        tn.nodeValue=v;
+      });
+    }
   }
   var pb=document.getElementById("pb"), fab;
 
