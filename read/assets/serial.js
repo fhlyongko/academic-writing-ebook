@@ -11,16 +11,37 @@
 
   var art=document.querySelector(".art"), stage=art&&art.querySelector(".wrap");
   var isEpisode=!!(art&&stage);
+  var EN=((document.documentElement.getAttribute("lang")||"").toLowerCase().indexOf("en")===0);
+  var PARTMAP={"1부 · 기초 다지기":"Part 1 · Foundations","2부 · 원고 쌓아 올리기":"Part 2 · Building the Manuscript","3부 · 완성과 확산":"Part 3 · Completion and Dissemination"};
+  var L=EN?{contents:"Contents",cover:"Cover · Contents",top:"Top",tocbtn:"Contents (T)",smaller:"Smaller text",larger:"Larger text",mode:"Page / Scroll",read:function(m){return "About "+m+" min read";},done:function(n,t){return n+" / "+t+" completed";}}
+           :{contents:"목차",cover:"표지 · 목차",top:"맨 위로",tocbtn:"목차 (T)",smaller:"글자 작게",larger:"글자 크게",mode:"넘김 / 스크롤",read:function(m){return "약 "+m+"분 분량 · 읽기";},done:function(n,t){return n+" / "+t+" 완료";}};
+  function trPart(x){ if(!EN)return x; for(var k in PARTMAP)x=x.split(k).join(PARTMAP[k]); x=x.replace(/(\d+)\s*화/g,function(_,d){return "Chapter "+d;}); return x; }
+  function translateChrome(){
+    if(!EN)return;
+    var meta=document.querySelector(".art__meta"); if(meta)meta.textContent=trPart(meta.textContent);
+    document.querySelectorAll(".nx a span").forEach(function(sp){var v=sp.textContent.trim();
+      if(v==="다음 화")sp.textContent="Next chapter"; else if(v==="마지막 화")sp.textContent="Final chapter"; else if(v==="이전 화")sp.textContent="Previous chapter";});
+    document.querySelectorAll(".nx a b").forEach(function(b){if(b.textContent.trim()==="목차로 돌아가기")b.textContent="Back to contents";});
+    var home=document.querySelector(".nx .home a"); if(home&&home.textContent.trim()==="목차 보기")home.textContent="Contents";
+    var go=document.querySelector(".cover .go"); if(go&&/1화부터 읽기/.test(go.textContent))go.textContent="Read from Chapter 1";
+    document.querySelectorAll(".cover a").forEach(function(a){if(/자료형/.test(a.textContent))a.textContent="View the reference edition →";});
+    var ih=document.querySelector(".intro h2"); if(ih&&/이 책에 대하여/.test(ih.textContent))ih.textContent="About this book";
+    var th=document.querySelector(".toc h2"); if(th&&/목차/.test(th.textContent))th.textContent="Contents";
+    var cnt=document.querySelector(".toc .cnt"); if(cnt)cnt.textContent="16 chapters in 3 parts";
+    document.querySelectorAll(".toc .pt").forEach(function(p){p.textContent=trPart(p.textContent);});
+    var umap={"회차":"chapters","부":"parts","쪽 원본":"source pages"};
+    document.querySelectorAll(".stats > div").forEach(function(d){var b=d.querySelector("b"); if(!b)return; var num=b.textContent; var unit=d.textContent.replace(num,"").trim(); if(umap[unit]!==undefined)d.innerHTML="<b>"+num+"</b> "+umap[unit];});
+  }
   var pb=document.getElementById("pb"), fab;
 
   /* ---------- bar controls ---------- */
   var barIn=document.querySelector(".bar__in"), barRight=document.querySelector(".bar__right"), tgl=document.getElementById("tgl");
-  var tocBtn=el("button","iconbtn","☰");tocBtn.title="목차 (T)";tocBtn.setAttribute("aria-label","목차");
+  var tocBtn=el("button","iconbtn","☰");tocBtn.title=L.tocbtn;tocBtn.setAttribute("aria-label",L.tocbtn);
   if(barIn)barIn.insertBefore(tocBtn,barIn.firstChild);
   var modeBtn;
   if(barRight&&tgl){
-    var fm=el("button","iconbtn sm","A−");fm.title="글자 작게";
-    var fp=el("button","iconbtn sm","A+");fp.title="글자 크게";
+    var fm=el("button","iconbtn sm","A−");fm.title=L.smaller;
+    var fp=el("button","iconbtn sm","A+");fp.title=L.larger;
     barRight.insertBefore(fm,tgl);barRight.insertBefore(fp,tgl);
     var sizes=[17,19,21,23,25];
     function curFs(){return parseFloat(getComputedStyle(root).getPropertyValue("--fs"))||19;}
@@ -28,7 +49,7 @@
     fp.addEventListener("click",function(){var c=curFs();for(var i=0;i<sizes.length;i++)if(sizes[i]>c+.5){setFs(sizes[i]);return}});
     fm.addEventListener("click",function(){var c=curFs();for(var i=sizes.length-1;i>=0;i--)if(sizes[i]<c-.5){setFs(sizes[i]);return}});
     if(isEpisode){
-      modeBtn=el("button","iconbtn","📖");modeBtn.title="넘김 / 스크롤 전환";modeBtn.setAttribute("aria-label","읽기 모드 전환");
+      modeBtn=el("button","iconbtn","📖");modeBtn.title=L.mode;modeBtn.setAttribute("aria-label",EN?"Toggle reading mode":"읽기 모드 전환");
       barRight.insertBefore(modeBtn,tgl);
     }
   }
@@ -44,7 +65,7 @@
   if(isEpisode){
     var h1=stage.querySelector("h1");
     if(h1){var chars=(stage.textContent||"").replace(/\s+/g,"").length;var mins=Math.max(1,Math.round(chars/620));
-      var rt=el("p","art__rt","약 "+mins+"분 분량 · 읽기");h1.parentNode.insertBefore(rt,h1.nextSibling);}
+      var rt=el("p","art__rt",L.read(mins));h1.parentNode.insertBefore(rt,h1.nextSibling);}
   }
 
   /* ---------- checklist meters ---------- */
@@ -54,13 +75,13 @@
       var ins=cl.querySelectorAll("input");if(!ins.length)return;
       var m=el("div","ck-meter",'<i></i><em></em>');cl.parentNode.insertBefore(m,cl.nextSibling);
       var bar=m.querySelector("i"),txt=m.querySelector("em");
-      function upd(){var n=0;ins.forEach(function(x){if(x.checked)n++});bar.style.setProperty("--p",(n/ins.length*100)+"%");txt.textContent=n+" / "+ins.length+" 완료";}
+      function upd(){var n=0;ins.forEach(function(x){if(x.checked)n++});bar.style.setProperty("--p",(n/ins.length*100)+"%");txt.textContent=L.done(n,ins.length);}
       ins.forEach(function(x){x.addEventListener("change",upd)});upd();
     });
   }
 
   /* ---------- FAB (scroll only) ---------- */
-  fab=el("button","fab","↑");fab.title="맨 위로";fab.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+  fab=el("button","fab","↑");fab.title=L.top;fab.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
   document.body.appendChild(fab);
 
   /* ---------- scroll progress ---------- */
@@ -81,12 +102,12 @@
   var curFile=(location.pathname.split("/").pop()||"index.html");
   function buildDrawer(tocRoot,fromEp){
     var bookT=(document.querySelector(".bar__home")||{}).textContent||"목차";
-    var head='<div class="drawer__h"><b>'+esc(bookT)+'</b><span>목차</span></div>';
+    var head='<div class="drawer__h"><b>'+esc(bookT)+'</b><span>'+L.contents+'</span></div>';
     var list='<div class="drawer__l">';
-    list+='<a class="drawer__e" href="'+(fromEp?"../index.html":"index.html")+'"><span class="n">◆</span><span>표지 · 목차</span></a>';
+    list+='<a class="drawer__e" href="'+(fromEp?"../index.html":"index.html")+'"><span class="n">◆</span><span>'+L.cover+'</span></a>';
     var kids=tocRoot.children;
     for(var i=0;i<kids.length;i++){var k=kids[i];
-      if(k.classList&&k.classList.contains("pt"))list+='<div class="drawer__pt">'+esc(k.textContent)+'</div>';
+      if(k.classList&&k.classList.contains("pt"))list+='<div class="drawer__pt">'+esc(trPart(k.textContent))+'</div>';
       else if(k.classList&&k.classList.contains("ep")){
         var n=(k.querySelector(".ep__n")||{}).textContent||"", t=(k.querySelector(".ep__t")||{}).textContent||"", href=k.getAttribute("href")||"#";
         if(fromEp)href=href.replace(/^ep\//,"");
@@ -95,12 +116,13 @@
       }}
     drawer.innerHTML=head+list+'</div>';
   }
+  translateChrome();
   var localToc=document.querySelector(".toc .wrap");
   if(localToc)buildDrawer(localToc,false);
   else fetch("../index.html").then(function(r){return r.text()}).then(function(html){
     var d=new DOMParser().parseFromString(html,"text/html"), tr=d.querySelector(".toc .wrap");
-    if(tr)buildDrawer(tr,true); else drawer.innerHTML='<div class="drawer__h"><b>목차</b></div><div class="drawer__l"><a class="drawer__e" href="../index.html"><span class="n">◆</span><span>표지 · 목차로</span></a></div>';
-  }).catch(function(){drawer.innerHTML='<div class="drawer__h"><b>목차</b></div><div class="drawer__l"><a class="drawer__e" href="../index.html"><span class="n">◆</span><span>표지로</span></a></div>';});
+    if(tr)buildDrawer(tr,true); else drawer.innerHTML='<div class="drawer__h"><b>'+L.contents+'</b></div><div class="drawer__l"><a class="drawer__e" href="../index.html"><span class="n">◆</span><span>'+L.cover+'</span></a></div>';
+  }).catch(function(){drawer.innerHTML='<div class="drawer__h"><b>'+L.contents+'</b></div><div class="drawer__l"><a class="drawer__e" href="../index.html"><span class="n">◆</span><span>'+L.cover+'</span></a></div>';});
 
   /* ---------- table / checklist injection (returns promise) ---------- */
   function injectTables(){
