@@ -124,7 +124,7 @@
     var head='<div class="drawer__h"><b>'+esc(bookT)+'</b><span>'+L.contents+'</span></div>';
     var list='<div class="drawer__l">';
     list+='<a class="drawer__e" href="'+(fromEp?"../index.html":"index.html")+'"><span class="n">◆</span><span>'+L.cover+'</span></a>';
-    var kids=tocRoot.children;
+    var kids=tocRoot.querySelectorAll(":scope .pt, :scope .ep");
     for(var i=0;i<kids.length;i++){var k=kids[i];
       if(k.classList&&k.classList.contains("pt"))list+='<div class="drawer__pt">'+esc(trPart(k.textContent))+'</div>';
       else if(k.classList&&k.classList.contains("ep")){
